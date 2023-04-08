@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import logging
-=======
 import json
 import logging
 from datetime import datetime
 from typing import Any, MutableMapping
->>>>>>> 1853092f2f177ab8f08b3e5b2aba365e54305cf1
 
 import torch
 
@@ -57,15 +53,9 @@ def evaluate(model, iterator, criterion):
 
     with torch.no_grad():
         for batch in iterator:
-<<<<<<< HEAD
-            text, _ = batch.text
-
-            predictions = model(text).squeeze(1)
-=======
             text, text_lengths = batch.text
 
             predictions = model(text, text_lengths).squeeze(1)
->>>>>>> 1853092f2f177ab8f08b3e5b2aba365e54305cf1
 
             loss = criterion(predictions, batch.label)
 
@@ -114,24 +104,12 @@ def register_logger(logging_path):
 
     logger.setLevel(logging.INFO)
     file_handler = logging.FileHandler(logging_path)
-<<<<<<< HEAD
-    file_handler.setFormatter(
-        logging.Formatter(
-            (
-                "%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d"
-                " - %(module)s.%(funcName)s - %(process)d - %(message)s"
-            ),
-            "%Y-%m-%dT%H:%M:%S.%f%z",
-        )
-    )
-=======
     file_handler.setFormatter(logging.Formatter(
         (
             "%(asctime)s - {color}%(levelname)s{reset} - %(filename)s:%(lineno)d"
             " - %(module)s.%(funcName)s - %(process)d - %(message)s"
         ), "%Y-%m-%dT%H:%M:%S.%f%z"
     ))
->>>>>>> 1853092f2f177ab8f08b3e5b2aba365e54305cf1
     logger.addHandler(file_handler)
 
     streaming_handler = logging.StreamHandler()
@@ -139,10 +117,3 @@ def register_logger(logging_path):
     logger.addHandler(streaming_handler)
 
     return logger
-<<<<<<< HEAD
-
-
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
-=======
->>>>>>> 1853092f2f177ab8f08b3e5b2aba365e54305cf1
